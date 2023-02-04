@@ -1,0 +1,73 @@
+### Getting all books
+GET http://localhost:3000/books
+
+### Getting one book by id
+GET http://localhost:3000/books/63cb36d36e47a1e91111b8ba
+
+### Creating a new book
+POST http://localhost:3000/books HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"Richard III",
+    "author":"William Shakespeare",
+    "edition":"4th edition",
+    "year":"1597",
+    "country":"Old England",
+    "price": "$ 5.50"
+}
+
+### Updating one book
+PUT http://localhost:3000/books/63cb36d36e47a1e91111b8ba HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Othelo",
+  "author": "William Shakespeare",
+  "edition": "2nd edition",
+  "year": "2000",
+  "country": "United Kingdom",
+  "price": "$ 7.50"
+}
+
+### Delete book
+DELETE http://localhost:3000/books/63ce209734bf0ab2e9884136 HTTP/1.1
+
+
+
+//PRODUCTION DEPLOY
+### Getting all books
+GET https://antonio-david-tejada-villalon-l05.onrender.com/books
+
+### Getting one book by id
+GET https://antonio-david-tejada-villalon-l05.onrender.com/books/63cb36d36e47a1e91111b8ba
+
+### Creating a new book
+POST https://antonio-david-tejada-villalon-l05.onrender.com/books HTTP/1.1
+Content-Type: application/json
+
+{
+    "title":"Richard III",
+    "author":"William Shakespeare",
+    "edition":"4th edition",
+    "year":"1597",
+    "country":"Old England",
+    "price": "$ 5.50"
+}
+
+### Updating one book
+PUT https://antonio-david-tejada-villalon-l05.onrender.com/books/63cb36d36e47a1e91111b8ba HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Othelo",
+  "author": "William Shakespeare",
+  "edition": "2nd edition",
+  "year": "1603",
+  "country": "United Kingdom",
+  "price": "$ 8.50"
+}
+
+### Delete book
+DELETE https://antonio-david-tejada-villalon-l05.onrender.com/books/63ce21ece7db94acf698ff10 HTTP/1.1
+
