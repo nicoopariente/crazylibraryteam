@@ -7,8 +7,8 @@ const authLogin = require('../midware/authorize');
 
 router.get('/', authLogin.verifyLogin, bookController.allBooks);
 router.get('/:id', authLogin.verifyLogin,bookController.oneBook);
-router.post('/', authLogin.verifyLogin, validation.checkBook, bookController.createABook);
-router.put('/:id', authLogin.verifyLogin, validation.checkBook, bookController.updateBook);
+router.post('/', authLogin.verifyLogin, validation.checkInfo, bookController.createABook);
+router.put('/:id', authLogin.verifyLogin, validation.checkInfo, bookController.updateBook);
 router.delete('/:id', authLogin.verifyLogin, bookController.deleteBook);
 
 
