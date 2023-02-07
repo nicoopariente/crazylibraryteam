@@ -6,7 +6,7 @@ const validation = require('../midware/validate');
 const authLogin = require('../midware/authorize');
 
 router.get('/', authLogin.verifyLogin, bookController.allCashRegister);
-router.put('/:id', authLogin.verifyLogin, validation.checkInfo, bookController.updateBuy);
+router.put('/:id', authLogin.verifyLogin, bookController.updateBuy);
 
 
 module.exports = router;

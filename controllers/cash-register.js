@@ -75,6 +75,7 @@ const findCash = async ( reveneu, cost) => {
     result.toArray().then((lists) =>{
         console.log(lists[0])
     });*/     findCash(reveneu, cost)
+              res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you. `);
               /*const reveneuu = reveneu + cost;
               const costLastPurchasee = cost;
               console.log(reveneuu);
@@ -94,15 +95,17 @@ const findCash = async ( reveneu, cost) => {
                   result2.toArray().then(async (lists) => {
                    
                     if (lists.length > 0){
-                      cost = json(lists[0].price);
+                      cost = lists[0].price;;
                       findCash(reveneu, cost);
+                      res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you.  `);
 
                     }else{
                         result3.toArray().then(async (lists) => {
                           
                           if (lists.length > 0){
-                            cost = json(lists[0].price);
+                            cost = lists[0].price;;
                             findCash(reveneu, cost);
+                            res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you.  `);
 
                             
                           }else{
