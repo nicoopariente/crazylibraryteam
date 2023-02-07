@@ -2,8 +2,8 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'Library API-1',
-    description: 'A William Shakespeare Collection',
+    title: 'Crazy Library',
+    description: 'Books, Magazines and Dictionaries',
   },
   host: 'localhost:3000',
   schemes: ['http'],
