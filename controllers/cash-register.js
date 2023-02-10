@@ -3,11 +3,24 @@ const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 const allCashRegister = async (req, res, next) => {
-    const result = await mongodb.getDb().db('crazylibrary').collection('cashregister').find();
+  const email = (req.oidc.user.email);
+  console.log(email);
+  if ((email == "hnpf2019@gmail.com") || (email == "4vdel777@gmail.com")){
+    try{const result = await mongodb.getDb().db('crazylibrary').collection('cashregister').find();
     result.toArray().then((lists) =>{
-        res.setHeader('Content-Type', 'application/json');
         res.status(200).json(lists);
-    });
+    });}catch(error){
+      if (error instanceof Error) {
+        res.status(500).send(error.message);
+      } else {
+        console.log('Unexpected error', error);
+      }
+    }
+    
+  }else{
+    res.status(200).json("Sorry, the Cash Register Information is just for Admin User.");
+  }
+   
 };
 
 const findCash = async ( reveneu, cost) => {
@@ -19,22 +32,20 @@ const findCash = async ( reveneu, cost) => {
     revenue: reveneuu,
     costLastPurchase: costLastPurchasee
   };
-  const response = await mongodb
+  
+    const response = await mongodb
     .getDb()
     .db('crazylibrary')
     .collection('cashregister')
-    .replaceOne({}, buy);
-  console.log(response);  
+    .replaceOne({}, buy); 
   
   if (response.modifiedCount > 0) {
     //res.status(204).send();
-    console.log("yes")
-  } else {
-    //res.status(500).json(response.error || 'Some error occurred while getting the purchasing.');
-    console.log("no")
-  }
+    return 1
+}else{
+  return 0
 }
-
+}
 
   const updateBuy = async (req, res) => {
     console.log(req.params.id);
@@ -74,8 +85,14 @@ const findCash = async ( reveneu, cost) => {
               /*const result = await mongodb.getDb().db('crazylibrary').collection('cashregister').find();
     result.toArray().then((lists) =>{
         console.log(lists[0])
-    });*/     findCash(reveneu, cost)
-              res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you. `);
+    });*/      findCash(reveneu, cost).then((answer) =>{
+      if(answer){
+        res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you. `);
+      }else{
+        res.status(404).json(`Sorry, there was a connection issue. Please try again. `);
+      }
+    })
+             
               /*const reveneuu = reveneu + cost;
               const costLastPurchasee = cost;
               console.log(reveneuu);
@@ -96,20 +113,33 @@ const findCash = async ( reveneu, cost) => {
                    
                     if (lists.length > 0){
                       cost = lists[0].price;;
-                      findCash(reveneu, cost);
-                      res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you.  `);
+                      findCash(reveneu, cost).then((answer) =>{
+                        if(answer){
+                          res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you. `);
+                        }else{
+                          res.status(404).json(`Sorry, there was a connection issue. Please try again. `);
+                        }
+                       
+                      })
+              
 
                     }else{
                         result3.toArray().then(async (lists) => {
                           
                           if (lists.length > 0){
                             cost = lists[0].price;;
-                            findCash(reveneu, cost);
-                            res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you.  `);
+                            findCash(reveneu, cost).then((answer) =>{
+                              if(answer){
+                                res.status(200).json(`Your purchase was done successfully. You will be charged $${cost}. Thanks you. `);
+                              }else{
+                                res.status(404).json(`Sorry, there was a connection issue. Please try again. `);
+                              }
+                            })
+                            
 
                             
                           }else{
-                            res.status(500).json('Some error occurred while finding the ID stated.');
+                            res.status(500).json('Product not recognized.');
                           }
                           
                           
